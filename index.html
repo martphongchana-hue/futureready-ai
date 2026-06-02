@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#271f66">
+  <title>DIGITECH FutureReady AI - Digital Curriculum Platform</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <style>
+    .menu-toggle{
+  display:none;
+}
+
+@media (max-width:768px){
+
+  .menu-toggle{
+    display:block;
+    background:var(--main-green-color);
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:10px 14px;
+    font-size:24px;
+  }
+
+  nav{
+    display:none;
+    flex-direction:column;
+    width:100%;
+  }
+
+  nav.show{
+    display:flex;
+  }
+
+  nav button{
+    width:100%;
+    text-align:left;
+  }
+}
+    #tutorList .white-card{
+    display:flex;
+    flex-direction:column;
+    min-height:300px;
+}
+
+#tutorList .price{
+    margin-top:auto;
+}
+
+#tutorList .btn{
+    margin-top:15px;
+}
+    #premium .pricing-card{
+    display:flex;
+    flex-direction:column;
+    min-height:330px;
+}
+
+#premium .pricing-card ul{
+    flex:1;
+}
+
+#premium .pricing-card button{
+    margin-top:auto;
+}
+    #courseList .white-card{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+#courseList .btn{
+    margin-top:auto;
+}
+    .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.pricing-card{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.pricing-card h2{
+    color:#271f66;
+}
+
+.pricing-card h3{
+    color:#00c4b3;
+    margin:15px 0;
+}
+
+.pricing-card ul{
+    list-style:none;
+    text-align:left;
+    padding:0;
+}
+
+.pricing-card li{
+    margin:10px 0;
+}
+
+.pricing-card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#271f66;
+    color:white;
+    cursor:pointer;
+}
+
+.premium{
+    border:3px solid #00c4b3;
+}
+
+.pro{
+    border:3px solid gold;
+}
+/* =========================================================
+   DIGITECH SUT STYLE THEME
+   Inspired by Digitech SUT: navy + mint green + clean white
+   ========================================================= */
+#home header{
+  background: transparent;
+}
+@font-face {
+    font-family: 'SUT';
+    src: url('font%20sut/SUT%20Light%20ver%201.00.otf') format('opentype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'SUT';
+    src: url('font%20sut/SUT%20Regular%20ver%201.00.otf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'SUT';
+    src: url('font%20sut/SUT%20Bold%20ver%201.00.otf') format('opentype');
+    font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-black-color: #292929;
+  --main-blue-color: #271f66;
+  --main-blue-dark: #16113f;
+  --main-green-color: #1dbea0;
+  --main-green-dark: #15947d;
+  --main-red-color: #e9565f;
+  --main-blue-gd: linear-gradient(220deg, rgba(39,31,102,1) 0%, rgba(29,190,160,1) 100%);
+  --dark-gray: #505050;
+  --gray: #f4f4f4;
+  --gray-2: #fafafa;
+  --white: #ffffff;
+  --border: #e7e7e7;
+  --soft-box-shadow: 0 8px 24px rgba(39,31,102,.12);
+  --box-shadow: 0 14px 36px rgba(39,31,102,.18);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  background: #ffffff;
+  color: var(--main-black-color);
+  font-family: 'SUT', sans-serif;
+  line-height: normal;
+}
+
+p,
+span,
+div,
+button,
+input,
+select,
+table,
+td,
+th,
+label,
+a,
+li,
+h1,
+h2,
+h3 {
+  font-family: 'SUT', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  color: var(--dark-gray);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+b { color: var(--main-black-color); }
+
+h1,
+h2,
+h3 {
+  font-family: 'SUTBold', Arial, sans-serif;
+  color: var(--main-blue-color);
+  font-weight: 900;
+}
+
+h1 {
+  font-size: 44px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+/* ===== TOPBAR / HEADER ===== */
+.topbar {
+  background: var(--main-blue-color);
+  color: white;
+  padding: 10px 8%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 28px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: rgba(39,31,102,.95);
+  backdrop-filter: blur(8px);
+
+  border-bottom: 3px solid var(--main-green-color);
+}
+.mainnav {
+  padding: 16px 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--main-blue-color);
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+
+.sut-logo-box {
+  line-height: 1;
+}
+
+.logo small,
+.sut-logo-box small {
+  display: block;
+  margin-top: 9px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--main-green-color);
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+nav button {
+  background: transparent;
+  border: 0;
+  color: white;
+  padding: 10px 13px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .2s ease;
+}
+nav button:hover,
+nav button.active {
+  background: var(--main-green-color);
+  color: white;
+  box-shadow: 0 6px 16px rgba(29,190,160,.25);
+}
+
+/* ===== SECTIONS ===== */
+section {
+  display: none;
+  padding: 50px 8%;
+  min-height: 82vh;
+  background: #ffffff;
+}
+
+section.active { display: block; }
+
+/* ===== HERO ===== */
+.hero-banner {
+  min-height: 520px;
+  background:
+    linear-gradient(90deg, rgba(39,31,102,.92), rgba(39,31,102,.52), rgba(29,190,160,.32)),
+   url('');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+    padding: 80px 3%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  right: -120px;
+  bottom: -120px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: rgba(29,190,160,.28);
+}
+
+.hero-banner > div {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-banner h1 {
+  color: white;
+  max-width: 820px;
+  font-size: 58px;
+
+  text-shadow:
+    0 4px 12px rgba(0,0,0,.45),
+    0 2px 6px rgba(0,0,0,.35);
+}
+
+.hero-banner p {
+  color: #eafffa;
+  max-width: 780px;
+  font-size: 20px;
+}
+
+/* ===== BREADCRUMB BAND ===== */
+.breadcrumb-band {
+  background: var(--main-blue-gd);
+  color: white;
+ padding: 26px 3%;
+}
+
+.breadcrumb-band p,
+.breadcrumb-band h2 {
+  color: white;
+}
+
+.breadcrumb-band p {
+  font-weight: 700;
+}
+
+.breadcrumb-band h2 {
+  margin-top: 6px;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 22px;
+}
+
+/* ===== CARDS ===== */
+.card,
+.white-card,
+.feature-card {
+  background: #ffffff;
+  color: var(--main-black-color);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 22px;
+  border: 1px solid #e8f5f2;
+  box-shadow: var(--soft-box-shadow);
+  overflow: hidden;
+}
+
+.card {
+  border-top: 6px solid var(--main-blue-color);
+}
+
+.white-card {
+  border-top: 6px solid var(--main-green-color);
+}
+
+.feature-card {
+  border-left: 8px solid var(--main-green-color);
+}
+
+.card p,
+.white-card p,
+.feature-card p {
+  color: var(--dark-gray);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  background: var(--main-green-color);
+  color: white;
+  border: 0;
+  padding: 14px 24px;
+  border-radius: 100px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 14px;
+  margin-right: 8px;
+  box-shadow: 0 8px 22px rgba(29,190,160,.25);
+  transition: .2s ease;
+}
+
+.btn:hover {
+  background: var(--main-green-dark);
+  transform: translateY(-1px);
+}
+
+.btn.secondary {
+  background: var(--main-blue-color);
+  color: white;
+  box-shadow: 0 8px 22px rgba(39,31,102,.22);
+}
+
+.btn.secondary:hover {
+  background: var(--main-blue-dark);
+}
+
+.btn.dark {
+  background: var(--main-blue-dark);
+  color: white;
+}
+
+.btn.danger {
+  background: #fee2e2;
+  color: #991b1b;
+  box-shadow: none;
+}
+
+/* ===== FORM ===== */
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d7eee9;
+  margin-bottom: 14px;
+  background: white;
+  color: var(--main-black-color);
+  font-size: 1rem;
+}
+
+input:focus,
+select:focus {
+  outline: 3px solid rgba(29,190,160,.18);
+  border-color: var(--main-green-color);
+}
+
+/* ===== SCORE / DASHBOARD ===== */
+.score {
+  color: var(--main-green-color);
+  font-size: 62px;
+  font-weight: 900;
+}
+
+.bar-bg {
+  background: #e9f8f5;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.bar {
+  height: 100%;
+  background: var(--main-blue-gd);
+  border-radius: 999px;
+  transition: width .25s ease;
+}
+
+/* ===== QUIZ OPTION ===== */
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 8px 0;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d7eee9;
+  background: #ffffff;
+  color: var(--main-black-color);
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.option:hover {
+  background: #effdfa;
+}
+
+.option.selected {
+  background: var(--main-green-color);
+  color: white;
+  border-color: var(--main-green-color);
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  color: var(--main-black-color);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+th,
+td {
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--main-blue-color);
+  color: white;
+}
+
+/* ===== SMALL COMPONENTS ===== */
+.badge {
+  display: inline-block;
+  background: #e9f8f5;
+  color: var(--main-green-dark);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.price {
+  font-size: 28px;
+  color: var(--main-green-dark);
+  font-weight: 900;
+}
+
+.admin-stat {
+  font-size: 30px;
+  color: var(--main-green-color);
+  font-weight: 900;
+  word-break: break-word;
+}
+
+.muted { color: var(--dark-gray) !important; }
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 12px 0;
+}
+
+canvas { max-height: 360px; }
+
+footer {
+  background: var(--main-blue-color);
+  color: white;
+  padding: 30px 8%;
+  margin-top: 40px;
+}
+
+footer p { color: #dff9f4; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .topbar { display: none; }
+  .mainnav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav { justify-content: flex-start; }
+  h1 { font-size: 34px; }
+  .hero-banner {
+    min-height: 430px;
+  }
+  .hero-banner h1 {
+    font-size: 40px;
+  }
+  .hero-banner p {
+    font-size: 18px;
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.logo-img{
+    height:70px;
+    width:auto;
+    display:block;
+}
+*{
+  font-family:'SUT',sans-serif !important;
+}
+  </style>
+  
+</head>
+
+<body>
+  <div class="topbar">
+    <span>ผู้สนใจสมัครเข้าศึกษา</span>
+    <span>นักศึกษาปัจจุบัน</span>
+    <span>ครูแนะแนว/ผู้ปกครอง</span>
+    <span>บุคลากร</span>
+  </div>
+
+  <header>
+    
+ <div class="mainnav">
+  <div class="logo">
+<img src="assets/logo_menu.png" alt="SUT Logo" class="logo-img">
+  </div>
+      <nav>
+        <button class="active" data-page="home">Home</button>
+        <button data-page="login">Register</button> 
+        <button data-page="curriculumPage">Curriculum</button>
+        <button data-page="assessment">Assessment</button>
+        <button data-page="dashboard">Dashboard</button>
+        <button data-page="career">Career</button>
+        <button data-page="learning">Learning</button>
+        <button data-page="marketplace">Courses</button>
+        <button data-page="tutors">Tutors</button>
+        <button data-page="jobs">Jobs</button>
+        <button data-page="checkout">Checkout</button>
+        <button data-page="teacher">Teacher</button>
+        <button data-page="premium">Premium</button>
+       <span id="premiumBadge" class="badge" style="display:none;">
+ Premium Member
+</span>
+
+<button id="cancelPremiumBtn"
+        onclick="cancelPremium()"
+        style="display:none;
+               margin-left:10px;
+               padding:6px 12px;
+               border:none;
+               border-radius:20px;
+               background:#e9565f;
+               color:white;
+               cursor:pointer;">
+  ยกเลิกสมาชิก
+</button>
+
+</nav>
+</div>
+  </header>
+
+  <section id="home" class="active" style="padding:0;">
+    <div class="hero-banner">
+      <div>
+        <p style="color:#fff;font-weight:900;">Suranaree University of Technology • Digital Curriculum Platform</p>
+        <h1>ระบบวิเคราะห์ทักษะดิจิทัล เพื่อเตรียมความพร้อมสู่ตลาดแรงงานยุค AI</h1>
+        <p>แพลตฟอร์มต้นแบบสำหรับประเมิน Skill Gap แนะนำหลักสูตร คอร์ส ติวเตอร์ และโอกาสงาน ภายใต้แนวคิด “เขาได้งาน เราได้เงิน”</p>
+        <button class="btn" data-go="assessment">เริ่มประเมินทักษะ</button>
+        <button class="btn secondary" data-go="marketplace">ดูคอร์สแนะนำ</button>
+      </div>
+    </div>
+
+    <div class="breadcrumb-band">
+      <p>หน้าแรก > การศึกษา > AI-Ready Digital Curriculum</p>
+      <h2>DIGITECH FutureReady AI</h2>
+    </div>
+
+    <div style="padding:48px 8%;">
+      <div class="grid">
+        <div class="feature-card">
+          <h2>AI Readiness Preview</h2>
+          <div class="score" id="homeScore">45%</div>
+          <div class="bar-bg"><div class="bar" id="homeBar" style="width:45%"></div></div>
+          <p>คะแนนความพร้อมด้าน AI จากแบบประเมิน</p>
+        </div>
+        <div class="feature-card">
+          <h2>Business Model</h2>
+          <p>• ขายคอร์สออนไลน์</p>
+          <p>• หักค่าคอมมิชชันจากติวเตอร์</p>
+          <p>• University Package สำหรับมหาวิทยาลัย</p>
+          <p>• Premium Career Report</p>
+        </div>
+        <div class="feature-card">
+          <h2>Research Value</h2>
+          <p>ใช้ข้อมูล Skill Gap เป็นฐานในการออกแบบ AI-Ready Digital Curriculum ให้ตอบโจทย์ตลาดแรงงานยุคปัญญาประดิษฐ์</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="login">
+    <h1>Register / Login</h1>
+    <p>สมัครสมาชิกเพื่อบันทึกผลประเมิน ประวัติการเรียน และคอร์สที่เลือก</p><br>
+    <div class="grid">
+      <div class="white-card">
+        <h2>สร้างบัญชีผู้ใช้</h2>
+        <input id="regName" placeholder="ชื่อผู้ใช้">
+        <input id="regEmail" placeholder="Email">
+        <input id="regPassword" type="password" placeholder="Password">
+        <button class="btn" id="registerBtn">Register / Login</button>
+        <p id="loginStatus" style="margin-top:12px;color:#0f766e;font-weight:bold;"></p>
+      </div>
+      <div class="card">
+        <h2>เลือกสายอาชีพที่สนใจ</h2>
+        <select id="targetCareer">
+  <option>Data Analyst</option>
+  <option>UX/UI Designer</option>
+  <option>AI Content Creator</option>
+  <option>Digital Marketing</option>
+  <option>Prompt Engineer</option>
+  <option>Power BI Specialist</option>
+  <option>Python Data Analyst</option>
+  <option>AI Career / HR Tech Assistant</option>
+</select>
+      
+        <p>ข้อมูลนี้ใช้เพื่อแนะนำ Career Path, คอร์ส และติวเตอร์ที่เหมาะสม</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  <section id="curriculumPage">
+    <h1>AI-Ready Digital Curriculum Design</h1>
+    <p>หลักสูตรต้นแบบที่ออกแบบจาก Skill Gap และความต้องการตลาดแรงงานยุค AI</p><br>
+    <div class="grid">
+      <div class="white-card"><span class="badge">Module 1</span><h2>AI Literacy</h2><p>พื้นฐาน AI, Generative AI, การใช้ AI Tools และข้อจำกัดของ AI</p></div>
+      <div class="white-card"><span class="badge">Module 2</span><h2>Prompt Engineering</h2><p>การเขียน Prompt เพื่อสรุป วิเคราะห์ วางแผน และสร้าง Workflow ด้วย AI</p></div>
+      <div class="white-card"><span class="badge">Module 3</span><h2>Data Analytics</h2><p>Excel, SQL, Power BI, Data Visualization และการตัดสินใจจากข้อมูล</p></div>
+      <div class="white-card"><span class="badge">Module 4</span><h2>AI Ethics & Security</h2><p>จริยธรรม AI, Privacy, Bias, Cyber Safety และการใช้ข้อมูลอย่างรับผิดชอบ</p></div>
+      <div class="white-card"><span class="badge">Module 5</span><h2>Human + Career Skills</h2><p>Communication, Problem Solving, Portfolio และการเตรียมตัวสมัครงาน</p></div>
+      <div class="white-card"><span class="badge">Module 6</span><h2>Industry Project</h2><p>โปรเจกต์จริงร่วมกับภาคอุตสาหกรรม เพื่อสร้าง Portfolio และประสบการณ์ทำงาน</p></div>
+    </div>
+    <div class="card">
+      <h2>AI Co-working Competency Model</h2>
+      <p>ระบบประเมินความสามารถในการทำงานร่วมกับ AI จาก 4 ด้าน ได้แก่ AI Literacy, Prompt Engineering, Data Skills และ Human Skills</p>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <h1>Skill Assessment</h1>
+    <p>ทำแบบประเมินเพื่อวิเคราะห์ว่าขาดทักษะใด จากนั้นระบบจะแนะนำคอร์สและติวเตอร์แบบเสียค่าใช้จ่าย</p><br>
+    <div id="quiz"></div>
+    <button class="btn" id="analyzeBtn">วิเคราะห์ Skill Gap</button>
+    <button class="btn secondary" id="resetBtn">รีเซ็ตคำตอบ</button>
+  </section>
+
+  <section id="dashboard">
+  <h1>Dashboard</h1>
+  <p>ผลวิเคราะห์ทักษะผู้ใช้ เทียบกับความต้องการตลาดแรงงาน</p><br>
+
+  <div class="white-card">
+    <h2>ข้อมูลผู้ใช้</h2>
+    <p id="userInfo"></p>
+  </div>
+
+  <br>
+
+  <div class="grid-2">
+      <div class="white-card">
+        <h2>Radar Chart</h2>
+        <canvas id="radarChart"></canvas>
+        <div style="margin-top:15px;padding:14px;background:#f8fafc;border-radius:8px;">
+          <p><b>Skill Gap Analysis:</b> กราฟเปรียบเทียบทักษะผู้ใช้กับชุดทักษะเป้าหมายที่อ้างอิงจาก WEF Future of Jobs Report 2025, LinkedIn Skills on the Rise และงานวิจัยด้าน AI Workforce Development</p>
+        </div>
+      </div>
+      <div class="white-card">
+        <h2>Skill Score</h2>
+        <div class="score" id="dashScore">45%</div>
+        <div id="skillBars"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Skill Gap + Course Banner</h2>
+      <div id="gapList"></div>
+      <button class="btn" data-go="marketplace">ดูคอร์สที่แนะนำ</button>
+      <button class="btn secondary" data-go="tutors">ดูติวเตอร์</button>
+      <button class="btn secondary" id="exportBtn">Export รายงาน</button>
+    </div>
+  </section>
+
+  <section id="career">
+    <h1>Career Recommendation</h1>
+    <p>ระบบแนะนำอาชีพจากทักษะผู้ใช้และเป้าหมายการทำงาน</p><br>
+    <table>
+      <thead><tr><th>Career</th><th>Match</th><th>ช่องทางสร้างรายได้ของระบบ</th></tr></thead>
+      <tbody id="careerTable"></tbody>
+    </table>
+    <button class="btn" data-go="learning">ไปหน้า Learning Path</button>
+  </section>
+
+  <section id="learning">
+    <h1>Learning Path</h1>
+    <p>เส้นทางการเรียนเฉพาะบุคคลจาก Skill Gap</p><br>
+    <div class="grid" id="moduleList"></div>
+    <button class="btn" data-go="marketplace">เลือกซื้อคอร์ส</button>
+  </section>
+
+  <section id="marketplace">
+    <h1>Course Marketplace</h1>
+    <p>คอร์สเสียค่าใช้จ่ายที่ระบบแนะนำตามทักษะที่ผู้ใช้ขาด</p><br>
+    <div id="courseBanner" class="card"></div>
+    <div class="grid" id="courseList"></div>
+  </section>
+
+  <section id="tutors">
+    <h1>Tutor Marketplace</h1>
+    <p>ถ้าผู้ใช้ต้องการเรียนแบบตัวต่อตัว สามารถจองติวเตอร์ได้ แพลตฟอร์มหักค่าคอมมิชชัน</p><br>
+    <div class="grid" id="tutorList"></div>
+  </section>
+
+  <section id="jobs">
+    <h1>Job & Company Recommendation</h1>
+    <p>ระบบแนะนำบริษัทและตำแหน่งงานที่เหมาะสมกับทักษะผู้ใช้</p><br>
+    <div class="grid" id="jobList"></div>
+  </section>
+
+  <section id="checkout">
+    <h1>Checkout</h1>
+    <p>หน้าชำระเงินจำลองสำหรับคอร์สและติวเตอร์ที่เลือก</p><br>
+    <div class="grid-2">
+      <div class="card">
+        <h2>รายการที่เลือก</h2>
+        <div id="cartList"></div>
+        <h2 style="margin-top:20px;">รวมทั้งหมด: <span id="cartTotal" style="color:#1dbea0;">0</span> บาท</h2>
+        <button class="btn" id="payBtn">ชำระเงินจำลอง</button>
+        <button class="btn danger" id="clearCartBtn">ล้างตะกร้า</button>
+      </div>
+      <div class="white-card">
+        <h2>Payment Mockup</h2>
+        <input placeholder="ชื่อบนบัตร / ชื่อผู้โอน">
+        <input placeholder="เลขอ้างอิงการชำระเงิน">
+        <select><option>โอนเงิน</option><option>บัตรเครดิต</option><option>PromptPay</option></select>
+        <p>หมายเหตุ: เป็นระบบจำลองเพื่อใช้พรีเซนต์งาน ไม่ได้ชำระเงินจริง</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="teacher">
+    <h1>Teacher Dashboard</h1>
+    <p>หน้าสำหรับอาจารย์หรือผู้พัฒนาหลักสูตร ใช้ดูแนวโน้มตลาดแรงงาน ทักษะที่ผู้เรียนขาด และคำแนะนำในการปรับหลักสูตร</p><br>
+    <div class="grid">
+      <div class="card"><h2>ผู้ใช้งานทั้งหมด</h2><div class="admin-stat">230</div><p>นักศึกษา 150 คน / คนทำงาน 80 คน</p></div>
+      <div class="card"><h2>AI Readiness เฉลี่ย</h2><div class="admin-stat">72%</div><p>คะแนนเฉลี่ยจากแบบประเมินทักษะ</p></div>
+      <div class="card"><h2>รายได้จำลองเดือนนี้</h2><div class="admin-stat" id="teacherRevenue">0 บาท</div><p>จากคอร์ส ติวเตอร์ และประกาศงาน</p></div>
+    </div>
+    <div class="grid-2">
+      <div class="white-card">
+        <h2>Top Skills in Demand</h2>
+        <p class="muted" style="margin-bottom:15px;">อ้างอิงจาก World Economic Forum Future of Jobs Report 2025, LinkedIn Skills on the Rise และงานวิจัยด้าน AI Workforce Development</p>
+        <table>
+          <thead><tr><th>ทักษะ</th><th>Importance</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>AI Literacy</td><td><span class="badge">Very High</span></td><td>WEF 2025</td></tr>
+            <tr><td>Analytical Thinking</td><td><span class="badge">Very High</span></td><td>WEF 2025</td></tr>
+            <tr><td>Technological Literacy</td><td><span class="badge">High</span></td><td>WEF 2025</td></tr>
+            <tr><td>Prompt Engineering</td><td><span class="badge">High</span></td><td>LinkedIn / AI Skills Trend</td></tr>
+            <tr><td>Data Analytics</td><td><span class="badge">High</span></td><td>LinkedIn / Labor Market</td></tr>
+            <tr><td>Communication</td><td><span class="badge">High</span></td><td>AI Workforce Research</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="white-card"><h2>Skill Gap Analytics</h2><canvas id="teacherSkillChart"></canvas></div>
+    </div>
+    <div class="grid">
+      <div class="card"><h2>Curriculum Recommendation</h2><p>• เพิ่ม Module: Prompt Engineering</p><p>• เพิ่ม Module: AI Literacy</p><p>• เพิ่ม Module: Data Analytics</p><p>• เพิ่ม Module: AI Ethics</p><p>• เพิ่ม Project-based Learning ร่วมกับบริษัท</p></div>
+      <div class="card"><h2>Business Insight</h2><p>คอร์สขายดีที่สุด: Prompt Engineering for Work</p><p>ติวเตอร์ยอดนิยม: อาจารย์กิตติ</p><p>บริษัทที่ลงประกาศมากที่สุด: SCB TechX</p></div>
+    </div>
+    <div class="card">
+      <h2>Research References</h2>
+      <p>• World Economic Forum. Future of Jobs Report 2025</p>
+      <p>• LinkedIn. Skills on the Rise / AI Skills Trend</p>
+      <p>• AI Workforce Development Research</p>
+      <p style="color:#666;margin-top:12px;">ข้อมูลในระบบใช้เป็นกรอบอ้างอิงเพื่อกำหนดชุดทักษะเป้าหมาย และนำไปวิเคราะห์ Skill Gap ระหว่างผู้เรียนกับความต้องการของตลาดแรงงานยุค AI</p>
+    </div>
+  </section>
+<section id="premium" class="page">
+
+<div class="section-header">
+    <h1>Premium Membership</h1>
+    <p>เลือกแพ็กเกจที่เหมาะกับคุณ</p>
+</div>
+
+<div class="pricing-grid">
+
+    <div class="pricing-card">
+        <h2>FREE</h2>
+        <h3>0 บาท</h3>
+
+        <ul>
+            <li>✓ Skill Gap เบื้องต้น</li>
+            <li>✓ Career Recommendation</li>
+            <li>✓ คอร์สฟรีบางส่วน</li>
+        </ul>
+
+        <button>เริ่มต้นฟรี</button>
+    </div>
+
+    <div class="pricing-card premium">
+        <h2>PREMIUM</h2>
+        <h3>99 บาท/เดือน</h3>
+
+        <ul>
+            <li>✓ ปลดล็อกคอร์สทั้งหมด</li>
+            <li>✓ Learning Path</li>
+            <li>✓ รายงาน Skill Gap</li>
+            <li>✓ Certificate</li>
+        </ul>
+
+      <button id="premiumBtn99"
+        onclick="buyPremium('Premium 99')">
+สมัคร Premium
+</button>
+    </div>
+
+    <div class="pricing-card pro">
+        <h2>PREMIUM PRO</h2>
+        <h3>389 บาท/เดือน</h3>
+
+        <ul>
+            <li>✓ ทุกอย่างใน Premium</li>
+            <li>✓ Resume Analyzer AI</li>
+            <li>✓ Mock Interview AI</li>
+            <li>✓ Career Roadmap</li>
+            <li>✓ Priority Support</li>
+        </ul>
+
+        <button id="premiumBtn389"
+        onclick="buyPremium('Premium Pro 389')">
+สมัคร Pro
+</button>
+    </div>
+
+</div>
+
+
+</section>
+  <footer>
+    <h3 style="color:white;">DIGITECH FutureReady AI</h3>
+    <p>AI-Ready Digital Curriculum Platform • Prototype for Research Presentation</p>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const skills = [
+    { key: 'ai', group: 'AI Skills', label: 'AI Tools', market: 90, q: 'คุณสามารถใช้ AI Tools ในระดับใด' },
+    { key: 'prompt', group: 'AI Skills', label: 'Prompt Engineering', market: 88, q: 'คุณเขียน Prompt เพื่อช่วยวิเคราะห์หรือสร้างงานได้แค่ไหน' },
+    { key: 'data', group: 'Digital Skills', label: 'Data Skills', market: 82, q: 'คุณวิเคราะห์ข้อมูลหรือทำ Dashboard ได้หรือไม่' },
+    { key: 'sql', group: 'Digital Skills', label: 'SQL', market: 75, q: 'คุณใช้ SQL หรือจัดการข้อมูลได้ระดับใด' },
+    { key: 'human', group: 'Human Skills', label: 'Communication', market: 85, q: 'คุณสื่อสาร ทำงานเป็นทีม และแก้ปัญหาได้ดีแค่ไหน' },
+    { key: 'career', group: 'Career Skills', label: 'Portfolio', market: 78, q: 'คุณมี Portfolio หรือผลงานที่ใช้สมัครงานได้หรือไม่' }
+  ];
+
+ function renderQuiz() {
+  const quiz = byId('quiz');
+  if (!quiz) return;
+
+  const customOptions = {
+    ai: [
+      { text: 'ไม่เคยใช้ AI มาก่อน', score: 25 },
+      { text: 'ใช้ ChatGPT ถามคำถามทั่วไป', score: 45 },
+      { text: 'ใช้ AI ช่วยเรียนหรือทำงาน', score: 70 },
+      { text: 'ใช้ AI สร้าง Workflow และ Automation', score: 90 }
+    ],
+
+    prompt: [
+      { text: 'ไม่เคยเขียน Prompt', score: 25 },
+      { text: 'ใช้ Prompt สั้น ๆ ทั่วไป', score: 45 },
+      { text: 'ปรับแต่ง Prompt เพื่อให้ได้ผลลัพธ์ดีขึ้น', score: 70 },
+      { text: 'ออกแบบ Prompt ขั้นสูงและ Chain Prompt ได้', score: 90 }
+    ],
+
+    data: [
+      { text: 'ไม่เคยวิเคราะห์ข้อมูล', score: 25 },
+      { text: 'ใช้ Excel พื้นฐาน', score: 45 },
+      { text: 'ใช้ Pivot Table และ Dashboard', score: 70 },
+      { text: 'วิเคราะห์ข้อมูลเชิงลึกและนำเสนอ Insight ได้', score: 90 }
+    ],
+
+    sql: [
+      { text: 'ไม่เคยใช้ SQL', score: 25 },
+      { text: 'เขียน SELECT พื้นฐานได้', score: 45 },
+      { text: 'JOIN และ Aggregate ได้', score: 70 },
+      { text: 'ออกแบบฐานข้อมูลและ Query ซับซ้อนได้', score: 90 }
+    ],
+
+    human: [
+      { text: 'ยังไม่มั่นใจในการสื่อสาร', score: 25 },
+      { text: 'สื่อสารงานพื้นฐานได้', score: 45 },
+      { text: 'นำเสนอและทำงานเป็นทีมได้ดี', score: 70 },
+      { text: 'เป็นผู้นำทีมและแก้ปัญหาความขัดแย้งได้', score: 90 }
+    ],
+
+    career: [
+      { text: 'ไม่มี Portfolio', score: 25 },
+      { text: 'มีผลงานแต่ยังไม่จัดเป็น Portfolio', score: 45 },
+      { text: 'มี Portfolio พร้อมสมัครงาน', score: 70 },
+      { text: 'มี Portfolio พร้อม Case Study และ Project จริง', score: 90 }
+    ]
+  };
+
+  quiz.innerHTML = skills.map(s => {
+
+    const opts = customOptions[s.key]
+      .map(o => {
+        const selected = answers[s.key] === o.score ? 'selected' : '';
+
+        return `
+          <button type="button"
+                  class="option ${selected}"
+                  data-skill="${s.key}"
+                  data-score="${o.score}">
+            ${o.text}
+          </button>
+        `;
+      })
+      .join('');
+
+    return `
+      <div class="white-card">
+        <p><b style="color:#1dbea0">${s.group}</b></p>
+        <h2>${s.q}</h2>
+        ${opts}
+      </div>
+    `;
+  }).join('');
+}
+ 
+
+  const modules = [
+    ['AI Basics', 'Beginner', 'เข้าใจ AI, Generative AI และข้อจำกัดของเครื่องมือ', '1 สัปดาห์'],
+    ['Prompt Engineering', 'Beginner', 'เขียน Prompt เพื่อสรุป วิเคราะห์ วางแผน และสร้างคอนเทนต์', '2 สัปดาห์'],
+    ['Data Fundamentals', 'Beginner', 'พื้นฐานข้อมูล Excel, Dashboard และ Data Visualization', '2 สัปดาห์'],
+    ['SQL for Work', 'Intermediate', 'ค้นหา จัดการ และสรุปข้อมูลด้วย SQL', '3 สัปดาห์'],
+    ['Python + Power BI', 'Intermediate', 'ใช้ Python และ Power BI เพื่อวิเคราะห์ข้อมูล', '4 สัปดาห์'],
+    ['UX + AI Project', 'Intermediate', 'ทำ Project จริง เพื่อสร้าง Portfolio สมัครงาน', '4 สัปดาห์']
+  ];
+
+  const courses = [
+    { id: 'c1', skill: 'prompt', title: 'Prompt Engineering for Work', level: 'Beginner', hours: 10, price: 990, desc: 'เรียนการเขียน Prompt ใช้ AI สรุป วิเคราะห์ วางแผน และสร้าง Workflow' },
+    { id: 'c2', skill: 'sql', title: 'SQL Fundamentals for Data Career', level: 'Beginner', hours: 15, price: 1490, desc: 'พื้นฐาน SQL สำหรับ Data Analyst พร้อม Workshop จริง' },
+    { id: 'c3', skill: 'data', title: 'Data Visualization with Power BI', level: 'Intermediate', hours: 12, price: 1290, desc: 'สร้าง Dashboard วิเคราะห์ข้อมูล และนำเสนอ Insight' },
+    { id: 'c4', skill: 'ai', title: 'AI Literacy Essentials', level: 'Beginner', hours: 8, price: 790, desc: 'เข้าใจ AI, Generative AI, ข้อจำกัด และการใช้งานอย่างปลอดภัย' },
+    { id: 'c5', skill: 'career', title: 'Portfolio for Digital Career', level: 'Beginner', hours: 6, price: 690, desc: 'สร้าง Portfolio และ Case Study เพื่อสมัครงานสายดิจิทัล' },
+    { id: 'c6', skill: 'human', title: 'Communication & Problem Solving', level: 'Beginner', hours: 8, price: 590, desc: 'พัฒนาการสื่อสาร การทำงานเป็นทีม และการแก้ปัญหา' },
+  { id:'c7', skill:'ai', title:'Generative AI for Productivity', level:'Intermediate', hours:12, price:1290, desc:'ใช้ ChatGPT และ AI Tools เพิ่มประสิทธิภาพการทำงาน' },
+
+{ id:'c8', skill:'ai', title:'AI Content Creation & Automation', level:'Intermediate', hours:14, price:1490, desc:'สร้างคอนเทนต์และระบบอัตโนมัติด้วย AI' },
+
+{ id:'c9', skill:'data', title:'Excel for Data Analysis', level:'Beginner', hours:10, price:890, desc:'วิเคราะห์ข้อมูลด้วย Excel และ Pivot Table' },
+
+{ id:'c10', skill:'data', title:'Python for Data Analytics', level:'Intermediate', hours:20, price:1990, desc:'วิเคราะห์ข้อมูลด้วย Python และ Pandas' },
+
+{ id:'c11', skill:'human', title:'UX Research Fundamentals', level:'Beginner', hours:8, price:990, desc:'พื้นฐานการวิจัยผู้ใช้งานและการเก็บข้อมูล UX' },
+
+{ id:'c12', skill:'human', title:'UI Design with Figma', level:'Beginner', hours:12, price:1190, desc:'ออกแบบ UI และ Prototype ด้วย Figma' },
+
+{ id:'c13', skill:'career', title:'Resume & LinkedIn Optimization', level:'Beginner', hours:6, price:790, desc:'ปรับ Resume และ LinkedIn ให้โดดเด่น' },
+
+{ id:'c14', skill:'career', title:'Interview Preparation with AI', level:'Beginner', hours:8, price:890, desc:'ฝึกสัมภาษณ์งานด้วย AI Coach' },
+
+{ id:'c15', skill:'career', title:'Freelance & Personal Branding', level:'Intermediate', hours:10, price:990, desc:'สร้างแบรนด์ส่วนตัวและหารายได้ออนไลน์' },
+
+{ id:'c16', skill:'sql', title:'Advanced SQL & Database Design', level:'Advanced', hours:18, price:1790, desc:'ออกแบบฐานข้อมูลและเขียน SQL ระดับมืออาชีพ' }
+  ];
+
+
+  const tutors = [
+    { id: 't1', skill: 'sql', name: 'อาจารย์ธนา', topic: 'SQL / Data Analytics', rating: 4.9, price: 350, desc: 'สอน SQL ตั้งแต่พื้นฐานถึงทำโจทย์สมัครงาน' },
+    { id: 't2', skill: 'prompt', name: 'อาจารย์กิตติ', topic: 'AI / Prompt Engineering', rating: 5.0, price: 500, desc: 'สอนใช้ AI ทำงานจริงและสร้าง Workflow' },
+    { id: 't3', skill: 'data', name: 'พี่เมย์', topic: 'Power BI / Dashboard', rating: 4.8, price: 400, desc: 'ติวทำ Dashboard และ Data Visualization' },
+    { id: 't4', skill: 'career', name: 'พี่บอส', topic: 'Portfolio / Resume', rating: 4.7, price: 300, desc: 'ช่วยตรวจ Portfolio และเตรียมสัมภาษณ์งาน' },
+    { 
+  id: 't5',
+  skill: 'human',
+  name: 'อาจารย์ศิริพร',
+  topic: 'UX Research',
+  rating: 4.9,
+  price: 450,
+  desc: 'สอน User Research, Interview และ UX Process'
+},
+
+{
+  id: 't6',
+  skill: 'human',
+  name: 'พี่มิน',
+  topic: 'UI Design with Figma',
+  rating: 4.8,
+  price: 400,
+  desc: 'สอนออกแบบ UI, Design System และ Prototype'
+},
+
+{
+  id: 't7',
+  skill: 'data',
+  name: 'อาจารย์ณัฐ',
+  topic: 'Python for Data Analytics',
+  rating: 5.0,
+  price: 550,
+  desc: 'สอน Python, Pandas และ Data Analysis'
+},
+
+{
+  id: 't8',
+  skill: 'career',
+  name: 'พี่เจมส์',
+  topic: 'AI Career Coach',
+  rating: 4.9,
+  price: 600,
+  desc: 'ให้คำปรึกษา Career Path, Resume และ Interview'
+}
+  ];
+
+  const jobs = [
+    { title: 'Junior Data Analyst', company: 'SCB TechX', match: 86, salary: '25,000 - 40,000', skill: 'SQL, Power BI, Data Analytics' },
+    { title: 'AI Content Creator', company: 'Wisesight', match: 92, salary: '20,000 - 35,000', skill: 'Prompt Engineering, Content Strategy' },
+    { title: 'UX/UI Designer', company: 'LINE MAN Wongnai', match: 80, salary: '25,000 - 45,000', skill: 'Figma, UX Research' },
+    { title: 'Digital Marketing Executive', company: 'Tellscore', match: 78, salary: '22,000 - 40,000', skill: 'SEO, Analytics, AI Tools' }
+  ];
+
+  let answers = { ai: 45, prompt: 25, data: 45, sql: 25, human: 70, career: 45 };
+  let cart = [];
+  let radarChart = null;
+  let teacherChart = null;
+
+  function escapeHTML(value) {
+    return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+  function byId(id) { return document.getElementById(id); }
+  function average() { const values = Object.values(answers); return Math.round(values.reduce((a, b) => a + b, 0) / values.length); }
+  function baht(n) { return Number(n).toLocaleString('th-TH'); }
+  function getGaps() { return skills.map(s => Object.assign({}, s, { gap: Math.max(s.market - answers[s.key], 0) })).sort((a,b)=>b.gap-a.gap); }
+  function weakSkillKeys() { return getGaps().filter(g => g.gap >= 20).map(g => g.key); }
+
+  function showPage(id) {
+    const section = byId(id);
+    if (!section) return;
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    section.classList.add('active');
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.toggle('active', btn.dataset.page === id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (id === 'dashboard') renderCharts();
+    if (id === 'teacher') renderTeacherChart();
+    if (id === 'marketplace') renderCourses();
+    if (id === 'tutors') renderTutors();
+    if (id === 'jobs') renderJobs();
+    if (id === 'checkout') renderCart();
+  }
+  function go(id) { showPage(id); }
+
+  
+
+  function setAnswer(key, score) {
+    if (!Object.prototype.hasOwnProperty.call(answers, key)) return;
+    answers[key] = Number(score);
+    renderQuiz();
+    calculateResult();
+  }
+
+  function calculateResult() {
+    const avg = average();
+    [['homeScore', avg + '%'], ['dashScore', avg + '%']].forEach(([id, text]) => { if (byId(id)) byId(id).textContent = text; });
+    if (byId('homeBar')) byId('homeBar').style.width = avg + '%';
+
+    if (byId('skillBars')) {
+      byId('skillBars').innerHTML = skills.map(s => {
+        const score = answers[s.key];
+        return '<p><b>' + escapeHTML(s.label) + '</b> <span style="float:right">' + score + '%</span></p><div class="bar-bg"><div class="bar" style="width:' + score + '%"></div></div>';
+      }).join('');
+    }
+
+    const gaps = getGaps();
+    if (byId('gapList')) {
+      byId('gapList').innerHTML = gaps.slice(0,3).map(g => {
+        const course = courses.find(c => c.skill === g.key);
+        const banner = course ? '<div class="white-card"><h3>แนะนำคอร์ส: ' + escapeHTML(course.title) + '</h3><p>' + escapeHTML(course.desc) + '</p><p class="price">' + baht(course.price) + ' บาท</p><button class="btn" data-add-course="' + course.id + '">เพิ่มลงตะกร้า</button></div>' : '';
+        return '<p><b>' + escapeHTML(g.label) + '</b> ยังขาด ' + g.gap + '% เมื่อเทียบกับตลาดแรงงาน</p>' + banner;
+      }).join('');
+    }
+
+    if (byId('careerTable')) {
+      const career = [
+        ['AI Content Creator', Math.min(98, avg + 25), 'คอร์ส Prompt + บริษัทลงประกาศงาน'],
+        ['UX Researcher', Math.min(92, avg + 13), 'คอร์ส UX + ติว Portfolio'],
+        ['Data Analyst', Math.min(88, avg + 6), 'คอร์ส SQL / Power BI'],
+        ['Digital Marketing', Math.min(86, avg + 10), 'คอร์ส AI Marketing']
+      ].sort((a,b)=>b[1]-a[1]);
+      byId('careerTable').innerHTML = career.map(c => '<tr><td><b>' + c[0] + '</b></td><td><span class="badge">' + c[1] + '%</span></td><td>' + c[2] + '</td></tr>').join('');
+    }
+
+    if (byId('moduleList')) {
+      byId('moduleList').innerHTML = modules.map((m,i) => '<div class="white-card"><span class="badge">' + m[1] + '</span><h2 style="margin-top:12px">' + (i+1) + '. ' + m[0] + '</h2><p>' + m[2] + '</p><p>⏱ ' + m[3] + '</p></div>').join('');
+    }
+  }
+
+  function renderCharts() {
+    calculateResult();
+    const ctx = byId('radarChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+    if (radarChart) radarChart.destroy();
+    radarChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: skills.map(s => s.label),
+        datasets: [
+          { label: 'ผู้ใช้', data: skills.map(s => answers[s.key]), borderColor: '#271f66', backgroundColor: 'rgba(39,31,102,.18)' },
+          { label: 'ตลาดแรงงาน', data: skills.map(s => s.market), borderColor: '#1dbea0', backgroundColor: 'rgba(29,190,160,.20)' }
+        ]
+      },
+      options: { responsive: true, scales: { r: { min: 0, max: 100 } } }
+    });
+  }
+
+ function renderCourses() {
+  const list = courses;
+    byId('courseBanner').innerHTML = '<h2>คอร์สที่ระบบแนะนำจาก Skill Gap</h2><p>ระบบเลือกคอร์สตามทักษะที่คุณยังขาด หากสมัครเรียน แพลตฟอร์มจะมีรายได้จากค่าคอร์สหรือค่าคอมมิชชัน</p>';
+    byId('courseList').innerHTML = list.map(c => '<div class="white-card"><span class="badge">' + c.level + '</span><h2>' + escapeHTML(c.title) + '</h2><p>' + escapeHTML(c.desc) + '</p><p>⏱ ' + c.hours + ' ชั่วโมง</p><p class="price">' + baht(c.price) + ' บาท</p><button class="btn" data-add-course="' + c.id + '">สมัครเรียน</button></div>').join('');
+  }
+
+  function renderTutors() {
+
+    const list = tutors;
+    byId('tutorList').innerHTML = list.map(t => '<div class="white-card"><span class="badge">⭐ ' + t.rating + '/5</span><h2>' + escapeHTML(t.name) + '</h2><p><b>' + escapeHTML(t.topic) + '</b></p><p>' + escapeHTML(t.desc) + '</p><p class="price">' + baht(t.price) + ' บาท/ชั่วโมง</p><button class="btn" data-add-tutor="' + t.id + '">จองติว 1 ชั่วโมง</button></div>').join('');
+  }
+
+  function renderJobs() {
+    byId('jobList').innerHTML = jobs.map(j => '<div class="white-card"><span class="badge">Match ' + j.match + '%</span><h2>' + escapeHTML(j.title) + '</h2><p><b>บริษัท:</b> ' + escapeHTML(j.company) + '</p><p><b>เงินเดือน:</b> ' + escapeHTML(j.salary) + ' บาท</p><p><b>ทักษะ:</b> ' + escapeHTML(j.skill) + '</p><button class="btn">ดูตำแหน่งงาน</button></div>').join('');
+  }
+
+  function addToCart(type, id) {
+    let item;
+    if (type === 'course') {
+      const c = courses.find(x => x.id === id);
+      item = { type: 'คอร์ส', id: c.id, name: c.title, price: c.price };
+    } else {
+      const t = tutors.find(x => x.id === id);
+      item = { type: 'ติวเตอร์', id: t.id, name: t.name + ' - ' + t.topic + ' 1 ชั่วโมง', price: t.price };
+    }
+    cart.push(item);
+    saveCart();
+    alert('เพิ่มลงตะกร้าแล้ว: ' + item.name);
+    renderCart();
+  }
+
+  function renderCart() {
+    const cartList = byId('cartList');
+    if (!cartList) return;
+    if (!cart.length) {
+      cartList.innerHTML = '<p>ยังไม่มีรายการในตะกร้า</p>';
+    } else {
+      cartList.innerHTML = cart.map((item, index) => '<div class="cart-item"><div><b>' + escapeHTML(item.type) + '</b><p>' + escapeHTML(item.name) + '</p></div><div><b>' + baht(item.price) + ' บาท</b><br><button class="btn danger" data-remove-cart="' + index + '">ลบ</button></div></div>').join('');
+    }
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    byId('cartTotal').textContent = baht(total);
+    if (byId('teacherRevenue')) byId('teacherRevenue').textContent = baht(total) + ' บาท';
+  }
+
+  function saveCart() { localStorage.setItem('futureReadyCart', JSON.stringify(cart)); }
+  function loadCart() { try { cart = JSON.parse(localStorage.getItem('futureReadyCart') || '[]'); } catch(e) { cart = []; } }
+
+  function registerUser() {
+    const user = {
+      name: byId('regName').value || 'Demo User',
+      email: byId('regEmail').value || 'demo@email.com',
+      career: byId('targetCareer').value,
+    
+      createdAt: new Date().toLocaleString('th-TH')
+    };
+    localStorage.setItem('futureReadyUser', JSON.stringify(user));
+    loadUserInfo();
+    byId('loginStatus').textContent = 'บันทึกบัญชีเรียบร้อย: ' + user.name;
+   alert('สมัคร / Login สำเร็จ กรุณาทำแบบประเมินทักษะต่อ');
+go('assessment');
+  }
+
+  function saveProfile() {
+    const old = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
+   const user = Object.assign({}, old, {
+ career: byId('targetCareer').value,
+ updatedAt: new Date().toLocaleString('th-TH')
+});
+    localStorage.setItem('futureReadyUser', JSON.stringify(user));
+  }
+
+  function saveAssessment() {
+    localStorage.setItem('futureReadyAnswers', JSON.stringify(answers));
+    localStorage.setItem('futureReadyScore', String(average()));
+  }
+
+  function loadSavedData() {
+    try {
+      const savedAnswers = localStorage.getItem('futureReadyAnswers');
+      if (savedAnswers) answers = Object.assign({}, answers, JSON.parse(savedAnswers));
+      const user = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
+      if (user.name) {
+        byId('regName').value = user.name || '';
+        byId('regEmail').value = user.email || '';
+        if (user.career) byId('targetCareer').value = user.career;
+        
+        byId('loginStatus').textContent = 'กำลังใช้งานบัญชี: ' + user.name;
+      }
+    } catch (e) { console.warn(e); }
+  }
+  function loadUserInfo(){
+
+  const user = JSON.parse(
+    localStorage.getItem('futureReadyUser')
+  );
+
+  if(user && byId('userInfo')){
+
+    byId('userInfo').innerHTML = `
+      <b>ชื่อ:</b> ${user.name || '-'}<br>
+      <b>อีเมล:</b> ${user.email || '-'}<br>
+      <b>อาชีพเป้าหมาย:</b> ${user.career || '-'}
+    `;
+  }
+}
+
+  function resetAssessment() {
+    answers = { ai:45, prompt:25, data:45, sql:25, human:70, career:45 };
+    localStorage.removeItem('futureReadyAnswers');
+    localStorage.removeItem('futureReadyScore');
+    renderQuiz();
+    calculateResult();
+    alert('รีเซ็ตคำตอบเรียบร้อย');
+  }
+
+  function exportReport() {
+    calculateResult();
+    const user = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
+    const gaps = getGaps();
+    const nl = '\n';
+    const report = [
+      'DIGITECH FutureReady AI Report', '',
+      'ชื่อผู้ใช้: ' + (user.name || 'Demo User'),
+      'Email: ' + (user.email || '-'),
+      'อาชีพเป้าหมาย: ' + byId('targetCareer').value,
+      'AI Readiness Score: ' + average() + '%', '',
+      'Skill Gap ที่ควรพัฒนา:',
+      gaps.slice(0,3).map((g,i) => (i+1) + '. ' + g.label + ' ขาด ' + g.gap + '%').join(nl), '',
+      'คอร์สเสียค่าใช้จ่ายที่แนะนำ:',
+      courses.filter(c => weakSkillKeys().includes(c.skill)).map((c,i) => (i+1) + '. ' + c.title + ' - ' + baht(c.price) + ' บาท').join(nl), '',
+      'แนวคิดระบบ: เขาได้งาน เราได้เงิน ผ่านการประเมินทักษะ แนะนำคอร์ส ติวเตอร์ และงาน'
+    ].join(nl);
+    const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'DIGITECH_FutureReady_AI_Report.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function renderTeacherChart() {
+    const ctx = byId('teacherSkillChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+    const data = [
+      { label: 'Prompt Engineering', gap: 78 },
+      { label: 'SQL', gap: 74 },
+      { label: 'Data Visualization', gap: 70 },
+      { label: 'AI Ethics', gap: 62 },
+      { label: 'Python', gap: 58 }
+    ];
+    if (teacherChart) teacherChart.destroy();
+    teacherChart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: data.map(d=>d.label), datasets:[{ label:'Skill Gap (%)', data:data.map(d=>d.gap), backgroundColor:'#1dbea0' }] },
+      options: { responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+    });
+  }
+
+  function payMockup() {
+    if (!cart.length) { alert('ยังไม่มีสินค้าในตะกร้า'); return; }
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert('ชำระเงินจำลองสำเร็จ รวม ' + baht(total) + ' บาท');
+    localStorage.setItem('futureReadyLastPayment', JSON.stringify({ total, cart, paidAt: new Date().toLocaleString('th-TH') }));
+  }
+
+  function wireEvents() {
+    document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
+    document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => go(btn.dataset.go)));
+    byId('registerBtn').addEventListener('click', registerUser);
+    byId('targetCareer').addEventListener('change', saveProfile);
+  
+    byId('analyzeBtn').addEventListener('click', () => { calculateResult(); saveAssessment(); go('dashboard'); });
+    byId('resetBtn').addEventListener('click', resetAssessment);
+    byId('exportBtn').addEventListener('click', exportReport);
+    byId('payBtn').addEventListener('click', payMockup);
+    byId('clearCartBtn').addEventListener('click', () => { cart = []; saveCart(); renderCart(); });
+
+    document.body.addEventListener('click', event => {
+      const option = event.target.closest('[data-skill]');
+      if (option) setAnswer(option.dataset.skill, Number(option.dataset.score));
+      const courseBtn = event.target.closest('[data-add-course]');
+      if (courseBtn) addToCart('course', courseBtn.dataset.addCourse);
+      const tutorBtn = event.target.closest('[data-add-tutor]');
+      if (tutorBtn) addToCart('tutor', tutorBtn.dataset.addTutor);
+      const removeBtn = event.target.closest('[data-remove-cart]');
+      if (removeBtn) { cart.splice(Number(removeBtn.dataset.removeCart), 1); saveCart(); renderCart(); }
+    });
+  }
+
+  function runSelfTests() {
+    console.assert(typeof go === 'function', 'go function exists');
+    console.assert(skills.length === 6, 'skills length = 6');
+    console.assert(courses.length >= 6, 'courses exist');
+    console.assert(tutors.length >= 4, 'tutors exist');
+    console.assert(average() >= 0 && average() <= 100, 'average in range');
+    console.log('SUT FutureReady AI self-tests passed');
+  }
+function buyPremium(plan){
+  localStorage.setItem('premiumPlan', plan);
+  updatePremiumStatus();
+  alert('สมัคร ' + plan + ' สำเร็จ');
+}
+
+function cancelPremium(){
+  if(confirm('ต้องการยกเลิกสมาชิก Premium ใช่หรือไม่?')){
+
+    localStorage.removeItem('premiumPlan');
+
+    const badge = byId('premiumBadge');
+    const cancelBtn = byId('cancelPremiumBtn');
+    const btn99 = byId('premiumBtn99');
+    const btn389 = byId('premiumBtn389');
+
+    if(badge) badge.style.display = 'none';
+    if(cancelBtn) cancelBtn.style.display = 'none';
+
+    if(btn99){
+      btn99.textContent = 'สมัคร Premium';
+      btn99.disabled = false;
+    }
+
+    if(btn389){
+      btn389.textContent = 'สมัคร Pro';
+      btn389.disabled = false;
+    }
+
+    alert('ยกเลิกสมาชิกเรียบร้อย');
+  }
+}
+
+  function updatePremiumStatus(){
+
+  const plan = localStorage.getItem('premiumPlan');
+
+  const badge = byId('premiumBadge');
+  const cancelBtn = byId('cancelPremiumBtn');
+
+  const btn99 = byId('premiumBtn99');
+  const btn389 = byId('premiumBtn389');
+
+  if(plan){
+
+    if(badge){
+      badge.style.display = 'inline-block';
+      badge.textContent = '👑 ' + plan;
+    }
+
+    if(cancelBtn){
+      cancelBtn.style.display = 'inline-block';
+    }
+
+    if(plan === 'Premium 99' && btn99){
+      btn99.textContent = '✓ สมาชิกแล้ว';
+      btn99.disabled = true;
+    }
+
+    if(plan === 'Premium Pro 389' && btn389){
+      btn389.textContent = '✓ สมาชิกแล้ว';
+      btn389.disabled = true;
+    }
+
+  }else{
+
+    if(badge){
+      badge.style.display = 'none';
+    }
+
+    if(cancelBtn){
+      cancelBtn.style.display = 'none';
+    }
+
+    if(btn99){
+      btn99.textContent = 'สมัคร Premium';
+      btn99.disabled = false;
+    }
+
+    if(btn389){
+      btn389.textContent = 'สมัคร Pro';
+      btn389.disabled = false;
+    }
+
+  }
+}
+  window.go = go;
+  window.showPage = showPage;
+  window.calculateResult = calculateResult;
+  window.exportReport = exportReport;
+  window.buyPremium = buyPremium;
+  window.cancelPremium = cancelPremium;
+
+
+  loadSavedData();
+loadUserInfo();
+updatePremiumStatus();
+loadCart();
+renderQuiz();
+calculateResult();
+renderCourses();
+renderTutors();
+renderJobs();
+renderCart();
+wireEvents();
+runSelfTests();
+})();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("Service Worker Error", err));
+  });
+}
+</script>
+
+</body>
+</html>
