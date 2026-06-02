@@ -1669,6 +1669,12 @@ if(menuToggle){
     nav.classList.toggle("show");
   });
 }
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", function(){
+    nav.classList.remove("show");
+  });
+});
 </script>
 
 </body>
