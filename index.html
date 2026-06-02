@@ -11,6 +11,32 @@
 
 
   <style>
+    @media (max-width:768px){
+
+  .topbar{
+    display:none;
+  }
+
+  header{
+    padding:0;
+  }
+
+  .mainnav{
+    min-height:70px;
+    padding:10px 15px;
+  }
+
+  .logo-img{
+    width:180px;
+  }
+
+  .menu-toggle{
+    width:48px;
+    height:48px;
+    padding:0;
+  }
+
+}
     /* Mobile Only */
 @media (max-width: 768px){
 
@@ -42,12 +68,13 @@
     @media (max-width:768px){
 
 .logo-img{
-   width:70px;
+   width:180px;
+   height:auto;
 }
 
 .logo{
-   flex-direction:column;
-   text-align:center;
+   flex-direction:row;
+   align-items:center;
 }
 
 h1{
@@ -60,10 +87,12 @@ h1{
 
 @media (max-width:768px){
 
-  .mainnav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+ .mainnav{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 15px;
+}
 
   .menu-toggle{
     display:block;
