@@ -746,46 +746,8 @@ footer p { color: #dff9f4; }
 *{
   font-family:'SUT',sans-serif !important;
 }
-@media (max-width:1366px){
 
-  nav{
-      display:none !important;
-  }
 
-  nav.show{
-      display:flex !important;
-  }
-
-}
-@media (max-width:1366px){
-
-  .menu-toggle{
-    display:block;
-    background:transparent;
-    border:none;
-    color:white;
-    font-size:30px;
-    cursor:pointer;
-  }
-
-  nav{
-    display:none !important;
-  }
-
-  nav.show{
-    display:flex !important;
-    flex-direction:column;
-    position:fixed;
-    top:70px;
-    left:0;
-    right:0;
-    background:#271f66;
-    z-index:9999;
-    padding:20px;
-    gap:10px;
-  }
-
-}
 #jobList .white-card{
   display:flex;
   flex-direction:column;
@@ -1795,17 +1757,44 @@ body.hero-visible #particleCanvas { opacity: 1; }
     display:none !important;
   }
 
+  .mainnav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
   nav{
     display:flex !important;
-    flex-wrap:wrap;
+    flex:1;
     justify-content:flex-end;
-    gap:4px;
+    gap:2px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+
+  nav::-webkit-scrollbar{
+    display:none;
   }
 
   nav button{
-    font-size:12px;
-    padding:8px 9px;
+    font-size:11px;
+    padding:6px 8px;
+    white-space:nowrap;
   }
+
+  .cart-icon-btn{
+    display:flex !important;
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+    margin-left:8px;
+  }
+
+  .logo-img{
+    height:48px;
+  }
+}
 
   .logo-img{
     height:50px;
