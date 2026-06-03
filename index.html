@@ -1454,20 +1454,27 @@ function go(id) {
 
   function saveCart() { localStorage.setItem('futureReadyCart', JSON.stringify(cart)); }
   function loadCart() { try { cart = JSON.parse(localStorage.getItem('futureReadyCart') || '[]'); } catch(e) { cart = []; } }
+function registerUser() {
+  const user = {
+    name: byId('regName').value || 'Demo User',
+    email: byId('regEmail').value || 'demo@email.com',
+    career: byId('targetCareer').value,
+    createdAt: new Date().toLocaleString('th-TH')
+  };
 
   localStorage.setItem('futureReadyUser', JSON.stringify(user));
 
-loadUserInfo();
+  loadUserInfo();
 
-document.getElementById('mainMenu')
-  .classList.remove('hide-before-login');
+  document.getElementById('mainMenu')
+    .classList.remove('hide-before-login');
 
-byId('loginStatus').textContent =
-  'บันทึกบัญชีเรียบร้อย : ' + user.name;
+  byId('loginStatus').textContent =
+    'บันทึกบัญชีเรียบร้อย : ' + user.name;
 
-alert('สมัคร / Login สำเร็จ');
+  alert('สมัคร / Login สำเร็จ');
 
-go('home');
+  go('home');
 
   function saveProfile() {
     const old = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
