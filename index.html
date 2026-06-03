@@ -767,6 +767,9 @@ footer p { color: #dff9f4; }
   line-height:1.5;
   padding:18px;
 }
+.hide-before-login{
+  display:none !important;
+}
   </style>
   
 </head>
@@ -788,7 +791,8 @@ footer p { color: #dff9f4; }
  <button class="menu-toggle" id="menuToggle">
 ☰
 </button>
-      <nav>
+      <nav id="mainMenu" class="hide-before-login">
+
         <button class="active" data-page="home">Home</button>
         <button data-page="login">Register</button> 
         <button data-page="curriculumPage">Curriculum</button>
@@ -822,8 +826,7 @@ footer p { color: #dff9f4; }
 </nav>
 </div>
   </header>
-
-  <section id="home" class="active" style="padding:0;">
+<section id="home" style="padding:0;">
     <div class="hero-banner">
       <div>
         <p style="color:#fff;font-weight:900;">Suranaree University of Technology • Digital Curriculum Platform</p>
@@ -862,7 +865,7 @@ footer p { color: #dff9f4; }
     </div>
   </section>
 
-  <section id="login">
+<section id="login" class="active">
     <h1>Register / Login</h1>
     <p>สมัครสมาชิกเพื่อบันทึกผลประเมิน ประวัติการเรียน และคอร์สที่เลือก</p><br>
     <div class="grid">
@@ -1452,20 +1455,19 @@ function go(id) {
   function saveCart() { localStorage.setItem('futureReadyCart', JSON.stringify(cart)); }
   function loadCart() { try { cart = JSON.parse(localStorage.getItem('futureReadyCart') || '[]'); } catch(e) { cart = []; } }
 
-  function registerUser() {
-    const user = {
-      name: byId('regName').value || 'Demo User',
-      email: byId('regEmail').value || 'demo@email.com',
-      career: byId('targetCareer').value,
-    
-      createdAt: new Date().toLocaleString('th-TH')
-    };
-    localStorage.setItem('futureReadyUser', JSON.stringify(user));
-    loadUserInfo();
-    byId('loginStatus').textContent = 'บันทึกบัญชีเรียบร้อย: ' + user.name;
-   alert('สมัคร / Login สำเร็จ กรุณาทำแบบประเมินทักษะต่อ');
-go('assessment');
-  }
+  localStorage.setItem('futureReadyUser', JSON.stringify(user));
+
+loadUserInfo();
+
+document.getElementById('mainMenu')
+  .classList.remove('hide-before-login');
+
+byId('loginStatus').textContent =
+  'บันทึกบัญชีเรียบร้อย : ' + user.name;
+
+alert('สมัคร / Login สำเร็จ');
+
+go('home');
 
   function saveProfile() {
     const old = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
@@ -1744,6 +1746,25 @@ document.addEventListener("click", function(e){
   }
 
 });
+window.onload = function(){
+
+  const user =
+    localStorage.getItem('futureReadyUser');
+
+  if(user){
+
+    document.getElementById('mainMenu')
+      .classList.remove('hide-before-login');
+
+    go('home');
+
+  }else{
+
+    go('login');
+
+  }
+
+};
 </script>
 
 </body>
