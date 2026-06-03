@@ -2075,6 +2075,43 @@ Logout
         <h2 style="margin-top:20px;">รวมทั้งหมด: <span id="cartTotal" style="color:#1dbea0;">0</span> บาท</h2>
         <button class="btn" id="payBtn">ชำระเงินจำลอง</button>
         <button class="btn danger" id="clearCartBtn">ล้างตะกร้า</button>
+        <div id="qrSection"
+        <div id="receiptSection"
+     style="display:none;margin-top:25px;padding:25px;border:2px solid #271f66;border-radius:16px;background:white;">
+
+  <h2 style="text-align:center;">ใบเสร็จรับเงิน</h2>
+  <p><b>เลขที่ใบเสร็จ:</b> <span id="receiptNo"></span></p>
+  <p><b>วันที่ชำระเงิน:</b> <span id="receiptDate"></span></p>
+  <p><b>สถานะ:</b> <span style="color:green;font-weight:bold;">ชำระเงินแล้ว</span></p>
+
+  <hr style="margin:15px 0;">
+
+  <div id="receiptItems"></div>
+
+  <hr style="margin:15px 0;">
+
+  <h2>รวมสุทธิ: <span id="receiptTotal" style="color:#1dbea0;"></span> บาท</h2>
+
+  <p style="font-size:14px;color:#777;">
+    * ใบเสร็จนี้เป็นระบบจำลองสำหรับการนำเสนอเท่านั้น
+  </p>
+
+  <button class="btn secondary" onclick="window.print()">พิมพ์ใบเสร็จ</button>
+</div>
+     style="display:none;text-align:center;margin-top:20px;">
+
+  <h2>QR Payment Demo</h2>
+
+  <img id="qrImage"
+       style="width:280px;max-width:100%;border-radius:12px;">
+
+  <p id="qrAmount"></p>
+
+  <p style="color:red;">
+    * QR นี้ใช้สำหรับพรีเซนต์เท่านั้น
+  </p>
+
+</div>
       </div>
       <div class="white-card">
         <h2>Payment Mockup</h2>
@@ -6362,7 +6399,19 @@ byId('loginBtn')
       const tutorBtn = event.target.closest('[data-add-tutor]');
       if (tutorBtn) addToCart('tutor', tutorBtn.dataset.addTutor);
       const removeBtn = event.target.closest('[data-remove-cart]');
-      if (removeBtn) { cart.splice(Number(removeBtn.dataset.removeCart), 1); saveCart(); renderCart(); }
+      if (removeBtn) { cart.splice(Number(removeBtn.dataset.removeCart), 1); saveCart(); renderCart(); 
+      const receiptNo = "RC" + Date.now();
+
+document.getElementById("receiptSection").style.display = "block";
+document.getElementById("receiptNo").textContent = receiptNo;
+document.getElementById("receiptDate").textContent =
+  new Date().toLocaleString("th-TH");
+
+document.getElementById("receiptTotal").textContent =
+  total.toLocaleString();
+
+document.getElementById("receiptItems").innerHTML =
+  document.getElementById("cartList").innerHTML;}
     });
   }
 
@@ -6972,6 +7021,37 @@ updateProMenu();
     </div>
   </div>
 </div>
+<script>
+
+document.getElementById("payBtn").addEventListener("click",()=>{
+
+  const totalElement = document.getElementById("cartTotal");
+  const total = parseInt(totalElement.textContent.replace(/,/g,'')) || 0;
+
+  const qrText = `DIGITECH DEMO PAYMENT ${total} BAHT`;
+
+  document.getElementById("qrSection").style.display="block";
+  document.getElementById("qrAmount").innerHTML =
+    `ยอดชำระจำลอง ${total.toLocaleString()} บาท`;
+
+  document.getElementById("qrImage").src =
+    `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrText)}`;
+
+  const receiptNo = "RC" + Date.now();
+
+  document.getElementById("receiptSection").style.display = "block";
+  document.getElementById("receiptNo").textContent = receiptNo;
+  document.getElementById("receiptDate").textContent =
+    new Date().toLocaleString("th-TH");
+
+  document.getElementById("receiptTotal").textContent =
+    total.toLocaleString();
+
+  document.getElementById("receiptItems").innerHTML =
+    document.getElementById("cartList").innerHTML;
+});
+
+</script>
 <!-- ===== END LOGIN MODAL ===== -->
 </body>
 </html>
