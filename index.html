@@ -464,8 +464,25 @@ section.active { display: block; }
   border-top: 6px solid var(--main-blue-color);
 }
 
-.white-card {
-  border-top: 6px solid var(--main-green-color);
+.white-card h2{
+    font-size: 32px;
+}
+
+.white-card p{
+    font-size: 20px;
+}
+
+.white-card .price{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.white-card .badge{
+    font-size: 18px;
+}
+
+.white-card .btn{
+    font-size: 18px;
 }
 
 .feature-card {
@@ -765,9 +782,9 @@ footer p { color: #dff9f4; }
   <header>
     
  <div class="mainnav">
-  <div class="logo">
-<img src="assets/logo_menu.png" alt="SUT Logo" class="logo-img">
-  </div>
+<div class="logo" onclick="go('home')" style="cursor:pointer;">
+  <img src="assets/logo_menu.png" alt="SUT Logo" class="logo-img">
+</div>
  <button class="menu-toggle" id="menuToggle">
 ☰
 </button>
@@ -1294,6 +1311,10 @@ footer p { color: #dff9f4; }
   function weakSkillKeys() { return getGaps().filter(g => g.gap >= 20).map(g => g.key); }
 
   function showPage(id) {
+    if(id === 'assessment' && !localStorage.getItem('futureReadyUser')){
+    alert('กรุณาสมัครสมาชิก / Login ก่อนทำแบบทดสอบ');
+    id = 'login';
+  }
     const section = byId(id);
     if (!section) return;
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -1307,7 +1328,19 @@ footer p { color: #dff9f4; }
     if (id === 'jobs') renderJobs();
     if (id === 'checkout') renderCart();
   }
-  function go(id) { showPage(id); }
+  function isLogin(){
+  return localStorage.getItem('futureReadyUser') !== null;
+}
+
+function go(id) {
+  if(id === 'assessment' && !isLogin()){
+    alert('กรุณาสมัครสมาชิก / Login ก่อนทำแบบทดสอบ');
+    showPage('login');
+    return;
+  }
+
+  showPage(id);
+}
 
   
 
