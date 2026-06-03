@@ -809,7 +809,9 @@ footer p { color: #dff9f4; }
        <span id="premiumBadge" class="badge" style="display:none;">
  Premium Member
 </span>
-
+ <button onclick="logoutUser()">
+Logout
+</button>
 <button id="cancelPremiumBtn"
         onclick="cancelPremium()"
         style="display:none;
@@ -874,7 +876,13 @@ footer p { color: #dff9f4; }
         <input id="regName" placeholder="ชื่อผู้ใช้">
         <input id="regEmail" placeholder="Email">
         <input id="regPassword" type="password" placeholder="Password">
-        <button class="btn" id="registerBtn">Register / Login</button>
+        <button class="btn" id="registerBtn">
+สร้างบัญชี
+</button>
+
+<button class="btn secondary" id="loginBtn">
+เข้าสู่ระบบ
+</button>
         <p id="loginStatus" style="margin-top:12px;color:#0f766e;font-weight:bold;"></p>
       </div>
       <div class="card">
@@ -1313,11 +1321,8 @@ footer p { color: #dff9f4; }
   function getGaps() { return skills.map(s => Object.assign({}, s, { gap: Math.max(s.market - answers[s.key], 0) })).sort((a,b)=>b.gap-a.gap); }
   function weakSkillKeys() { return getGaps().filter(g => g.gap >= 20).map(g => g.key); }
 
+
   function showPage(id) {
-    if(id === 'assessment' && !localStorage.getItem('futureReadyUser')){
-    alert('กรุณาสมัครสมาชิก / Login ก่อนทำแบบทดสอบ');
-    id = 'login';
-  }
     const section = byId(id);
     if (!section) return;
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -1335,14 +1340,76 @@ footer p { color: #dff9f4; }
   return localStorage.getItem('futureReadyUser') !== null;
 }
 
-function go(id) {
-  if(id === 'assessment' && !isLogin()){
-    alert('กรุณาสมัครสมาชิก / Login ก่อนทำแบบทดสอบ');
-    showPage('login');
+function registerUser(){
+
+  const name = byId('regName').value.trim();
+  const email = byId('regEmail').value.trim();
+  const password = byId('regPassword').value.trim();
+
+  if(!name || !email || !password){
+    alert('กรุณากรอกข้อมูลให้ครบ');
     return;
   }
 
-  showPage(id);
+  const user = {
+    name,
+    email,
+    password,
+    career: byId('targetCareer').value
+  };
+
+  localStorage.setItem(
+    'futureReadyUser',
+    JSON.stringify(user)
+  );
+
+  alert('สร้างบัญชีสำเร็จ');
+}
+
+function loginUser(){
+
+  const email =
+    byId('regEmail').value.trim();
+
+  const password =
+    byId('regPassword').value.trim();
+
+  const user = JSON.parse(
+    localStorage.getItem('futureReadyUser')
+  );
+
+  if(!user){
+    alert('ยังไม่มีบัญชีผู้ใช้');
+    return;
+  }
+
+  if(
+  user.email === email &&
+  user.password === password
+){
+
+  localStorage.setItem(
+    'isLoggedIn',
+    'true'
+  );
+
+  showPage('home');
+} else {
+  alert('อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+}
+}
+
+function logoutUser(){
+
+  localStorage.removeItem('isLoggedIn');
+
+  document
+    .getElementById('mainMenu')
+    .classList.add('hide-before-login');
+
+  alert('ออกจากระบบแล้ว');
+
+  location.reload();
 }
 
   
@@ -1454,19 +1521,25 @@ function go(id) {
 
   function saveCart() { localStorage.setItem('futureReadyCart', JSON.stringify(cart)); }
   function loadCart() { try { cart = JSON.parse(localStorage.getItem('futureReadyCart') || '[]'); } catch(e) { cart = []; } }
-function registerUser() {
+
+  function registerUser(){
+
   const user = {
-    name: byId('regName').value || 'Demo User',
-    email: byId('regEmail').value || 'demo@email.com',
-    career: byId('targetCareer').value,
-    createdAt: new Date().toLocaleString('th-TH')
+    name: byId('regName').value,
+    email: byId('regEmail').value,
+    password: byId('regPassword').value,
+    career: byId('targetCareer').value
   };
 
-  localStorage.setItem('futureReadyUser', JSON.stringify(user));
+  localStorage.setItem(
+    'futureReadyUser',
+    JSON.stringify(user)
+  );
 
   loadUserInfo();
 
-  document.getElementById('mainMenu')
+  document
+    .getElementById('mainMenu')
     .classList.remove('hide-before-login');
 
   byId('loginStatus').textContent =
@@ -1475,6 +1548,7 @@ function registerUser() {
   alert('สมัคร / Login สำเร็จ');
 
   go('home');
+}
 
   function saveProfile() {
     const old = JSON.parse(localStorage.getItem('futureReadyUser') || '{}');
@@ -1585,7 +1659,11 @@ function registerUser() {
   function wireEvents() {
     document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
     document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => go(btn.dataset.go)));
-    byId('registerBtn').addEventListener('click', registerUser);
+    byId('registerBtn')
+.addEventListener('click', registerUser);
+
+byId('loginBtn')
+.addEventListener('click', loginUser);
     byId('targetCareer').addEventListener('change', saveProfile);
   
     byId('analyzeBtn').addEventListener('click', () => { calculateResult(); saveAssessment(); go('dashboard'); });
@@ -1700,7 +1778,14 @@ function cancelPremium(){
 
   }
 }
+
+function go(page){
+  showPage(page);
+}
+  window.showPage = showPage;
+  window.loadUserInfo = loadUserInfo;
   window.go = go;
+  window.logoutUser = logoutUser;
   window.showPage = showPage;
   window.calculateResult = calculateResult;
   window.exportReport = exportReport;
@@ -1755,21 +1840,30 @@ document.addEventListener("click", function(e){
 });
 window.onload = function(){
 
-  const user =
-    localStorage.getItem('futureReadyUser');
+  const isLoggedIn =
+    localStorage.getItem('isLoggedIn');
 
-  if(user){
+  if(isLoggedIn === 'true'){
 
-    document.getElementById('mainMenu')
+    document
+      .getElementById('mainMenu')
       .classList.remove('hide-before-login');
 
-    go('home');
 
   }else{
 
-    go('login');
+    showPage('login');
 
   }
+ 
+  window.onload = function(){
+
+  loadUserInfo();
+  showPage('home');
+
+}
+
+
 
 };
 </script>
